@@ -25,7 +25,7 @@ class Salon extends RestController
   {
     parent::__construct();
     $this->load->model('Salon_model');
-    $this->methods['index_get']['limit'] = 2;
+    // $this->methods['index_get']['limit'] = ;
   }
 
   public function index_get(){
@@ -34,9 +34,9 @@ class Salon extends RestController
       $p = $this->get('page');
       $p = (empty($p) ? 1 : $p);
       $total_data = $this->Salon_model->count();
-      $total_page = ceil($total_data / 5);
-      $start = ($p - 1)* 5;
-      $list = $this->Salon_model->get(null, 5, $start);
+      $total_page = ceil($total_data / 30);
+      $start = ($p - 1)* 30;
+      $list = $this->Salon_model->get(null, 30, $start);
       if($list){
         $data = [
           'status' =>true,
@@ -64,11 +64,11 @@ class Salon extends RestController
 
   public function index_post(){
     $data = [
-      'ID_salon' => $this->put('ID', true),
-      'nama_salon' => $this->put('salon', true),
-      'kota' => $this->put('kota', true),
-      'alamat' => $this->put('alamat', true),
-      'telepon' => $this->put('telepon', true)
+      // 'ID_salon' => $this->put('ID', true),
+      'nama_salon' => $this->post('salon', true),
+      'kota' => $this->post('kota', true),
+      'alamat' => $this->post('alamat', true),
+      'telepon' => $this->post('telepon', true)
     ];
     $simpan = $this->Salon_model->add($data);
     if($simpan['status']){
@@ -81,7 +81,7 @@ class Salon extends RestController
   public function index_put()
   {
     $data = [
-      'ID_salon' => $this->put('ID', true),
+      // 'ID_salon' => $this->put('ID', true),
       'nama_salon' => $this->put('salon', true),
       'kota' => $this->put('kota', true),
       'alamat' => $this->put('alamat', true),
